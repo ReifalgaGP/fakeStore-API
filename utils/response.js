@@ -1,8 +1,15 @@
 const response = (statusCode, data, count, res) => {
   res.status(statusCode).json({
-    datas: data,
+    data,
     totalDataUser: count,
   });
 };
 
-module.exports = response;
+const responseInvalidUrl = (statusCode, message, res) => {
+  res.status(statusCode).json({
+    status: statusCode,
+    message: message,
+  });
+};
+
+module.exports = { response, responseInvalidUrl };
