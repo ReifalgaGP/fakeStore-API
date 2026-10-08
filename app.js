@@ -1,10 +1,12 @@
 const userRoutes = require("./routes/userRoutes");
-const invalidUrl = require("./middleware/invalidUrl");
+const errorHandler = require("./middleware/errorHandler");
 const express = require("express");
+const invalidUrl = require("./middleware/invalidUrl");
 const app = express();
 
 app.use(express.json());
 
 app.get("/users", userRoutes);
-app.use(invalidUrl); //middleware
+app.get("/users/:id", userRoutes);
+app.use(invalidUrl, errorHandler);
 module.exports = app;
