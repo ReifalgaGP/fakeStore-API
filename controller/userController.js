@@ -6,9 +6,7 @@ const getAllDataUser = async (req, res, next) => {
     const { data, count, error } = await db
       .from("users")
       .select("*", { count: "exact" });
-
     if (error) throw error;
-
     response(200, data, count, res);
   } catch (error) {
     next(error);
