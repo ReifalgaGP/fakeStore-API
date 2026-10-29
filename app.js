@@ -10,5 +10,6 @@ app.use(limiter);
 
 app.get("/users", userRoutes);
 app.get("/users/:id", userRoutes);
+app.post("/users", userRoutes);
 app.use(invalidUrl, errorHandler);
 module.exports = app;

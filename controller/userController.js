@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const userStore = require("../libs/newUsers");
 const { response, responseError } = require("../utils/response");
 
 const getAllDataUser = async (req, res, next) => {
@@ -31,4 +32,18 @@ const getDataUserById = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllDataUser, getDataUserById };
+const createUser = (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "Invalid input" });
+    }
+
+    const user = userStore.create({ name, email, password });
+    res.status(201).json({ message: "Data successfully added", data: user });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllDataUser, getDataUserById, createUser };
