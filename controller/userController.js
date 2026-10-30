@@ -1,5 +1,5 @@
 const db = require("../config/db");
-const userStore = require("../libs/newUsers");
+const userStore = require("../utils/newUser");
 const { response, responseError } = require("../utils/response");
 
 const getAllDataUser = async (req, res, next) => {
