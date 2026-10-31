@@ -3,8 +3,10 @@ const errorHandler = require("./middleware/errorHandler");
 const express = require("express");
 const invalidUrl = require("./middleware/invalidUrl");
 const limiter = require("./middleware/rateLimiter");
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(limiter);
 
