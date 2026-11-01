@@ -1,7 +1,7 @@
 const response = (statusCode, data, count, res) => {
   res.status(statusCode).json({
+    totalData: count,
     data,
-    totalDataUser: count,
   });
 };
 
