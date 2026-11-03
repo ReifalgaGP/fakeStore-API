@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const dataProduct = require("../utils/funcProduct");
 const { response, responseError } = require("../utils/response");
 
 const getAllDataProduct = async (req, res, next) => {
@@ -31,4 +32,30 @@ const getDataProductsById = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllDataProduct, getDataProductsById };
+const createProduct = (req, res, next) => {
+  try {
+    const { title, price, description, image } = req.body;
+    if (!title || !price || !description || !image) {
+      return res.status(400).json({ message: "Invalid input" });
+    }
+
+    const numPrice = Number(price);
+    if (!Number.isFinite(numPrice) || numPrice < 0) {
+      return res
+        .status(400)
+        .json({ message: "The input price must consist only of numbers." });
+    }
+
+    const product = dataProduct.create({
+      title,
+      price: numPrice,
+      description,
+      image,
+    });
+    res.status(200).json({ message: "Data succesfully added", data: product });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllDataProduct, getDataProductsById, createProduct };

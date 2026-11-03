@@ -2,7 +2,7 @@ const datasUsers = [];
 let id = Math.floor(Math.random() * 100) + 1;
 
 export function create({ name, email, password }) {
-  const user = { id: id++, name, email, password };
+  const user = { id, name, email, password };
   datasUsers.push(user);
   return user;
 }
