@@ -58,4 +58,33 @@ const createProduct = (req, res, next) => {
   }
 };
 
-module.exports = { getAllDataProduct, getDataProductsById, createProduct };
+const updateProduct = (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const { title, price, description, image } = req.body;
+    const product = dataProduct.update(id, {
+      title: req.body.title,
+      price: req.body.price,
+      description: req.body.description,
+      image: req.body.image,
+    });
+    if (!title || !price || !description || !image) {
+      return res.status(400).json({ message: "Invalid input" });
+    }
+    if (!product) {
+      return res.status(404).json({ message: "Product Not Found" });
+    }
+    res
+      .status(200)
+      .json({ message: "data Successfully Update", data: product });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  getAllDataProduct,
+  getDataProductsById,
+  createProduct,
+  updateProduct,
+};

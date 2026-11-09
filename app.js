@@ -22,6 +22,7 @@ app.delete("/users/:id", userRoutes);
 app.get("/products", productsRoutes);
 app.get("/products/:id", productsRoutes);
 app.post("/products", productsRoutes);
+app.put("/products/:id", productsRoutes);
 
 app.use(invalidUrl, errorHandler);
 
