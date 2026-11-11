@@ -82,9 +82,25 @@ const updateProduct = (req, res, next) => {
   }
 };
 
+const deleteProduct = (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const product = dataProduct.remove(id);
+    if (!product) {
+      return res.status(404).json({ message: "Product Not Found" });
+    }
+    res
+      .status(200)
+      .json({ message: "Product Successfully Removed", data: product });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllDataProduct,
   getDataProductsById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

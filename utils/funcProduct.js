@@ -17,3 +17,11 @@ export function update(id, { title, price, description, image }) {
   product.image = image;
   return product;
 }
+
+export function remove(id) {
+  const product = dataProduct.findIndex((value) => value.id === id);
+  if (product === -1) return null;
+
+  const [productRemove] = dataProduct.splice(product, 1);
+  return productRemove;
+}
